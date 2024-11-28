@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, viewsets
+from rest_framework import generics
 from .serialization import *
 from .models import *
 from rest_framework.response import Response
