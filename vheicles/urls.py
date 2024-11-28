@@ -8,7 +8,7 @@ urlpatterns = [
 
     path("vehicles", VehicleView.as_view(), name="list-vehicles"),
     path("vehicles/add", VehicleAddView.as_view(), name="add-vehicle"),
-    path("vehicles/<int:pk>", VehicleGetbyidView.as_view(), name="get-vehicle"),
-    path("vehicles/<int:pk>/update", VehicleUpdateView.as_view(), name="update-vehicle"),
-    path("vehicles/<int:pk>/delete", VehicleDeleteView.as_view(), name="delete-vehicle"),
+    path("vehicles/<int:id>", VehicleGetbyidView.as_view(), name="get-vehicle"),
+    path("vehicles/<int:id>/update", VehicleUpdateView.as_view(), name="update-vehicle"),
+    path("vehicles/<int:id>/delete", VehicleDeleteView.as_view(), name="delete-vehicle"),
 ]
