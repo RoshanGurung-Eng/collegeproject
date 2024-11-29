@@ -12,7 +12,8 @@ class Customer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return self.first_name and self.last_name
+    
 class CarOrders(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)

@@ -53,3 +53,22 @@ class VehicleDeleteView(generics.DestroyAPIView):
     serializer_class = VehicleSerialization
     permission_classes = [permissions.IsAuthenticated]
 
+class SearchView(generics.ListAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleSerialization
+    pagination_class = PageNumberPagination
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        try:
+            queryset = super().get_queryset()
+            search_query = self.request.query_params.get('title', None)
+
+            if search_query:
+                queryset = queryset.filter(title__icontains=search_query)
+
+            return queryset
+        except Exception as e:
+            return Response({"error": "No Product Found"}, status=400)
+       
+

@@ -8,13 +8,12 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CarOrdersSerializer(serializers.ModelSerializer):
-    product = serializers.PrimaryKeyRelatedField(queryset=Vehicle.objects.all(), many=True)
+    vehicle = serializers.PrimaryKeyRelatedField(queryset=Vehicle.objects.all(), many=True)
     user = serializers.ReadOnlyField(source='user.id')
 
     class Meta:
         model = CarOrders
-        fields = ['id','name', 'address', 'phone', 
-                  'vehicle', 'quantity', 'user', 'orderStatus', 'created_at']
+        fields = ['id','name', 'address', 'phone','vehicle', 'quantity', 'user', 'orderStatus', 'created_at']
         read_only_fields = ['orderStatus', 'created_at']
     
     def create (self, validated_data):

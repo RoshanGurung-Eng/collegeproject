@@ -36,3 +36,19 @@ class UpdateProfileSerializer(serializers.ModelSerializer):
         instance.username = validated_data['username']
         instance.save()
         return instance
+    
+from rest_framework_simplejwt.tokens import RefreshToken
+
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+    def validate(self, attrs):
+        self.token = attrs['refresh']
+        return attrs
+    
+    def save(self, **kwargs):
+        try:
+            refresh_token = RefreshToken(self.token)
+            refresh_token.blacklist()
+
+        except Exception as e:
+            self.fail('invalid_token')

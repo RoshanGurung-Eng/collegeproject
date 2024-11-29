@@ -17,7 +17,7 @@ class VehicleCategoryListSerialization(serializers.ModelSerializer):
         model = VehicleCategory
         fields = ['id', 'vehicle_name','category_img', 'vehicle']
 
-    def get_product(self, obj):
+    def get_vehicle(self, obj):
         vehicle = Vehicle.objects.filter(category=obj)
         return VehicleSerialization(vehicle, many=True).data
 
