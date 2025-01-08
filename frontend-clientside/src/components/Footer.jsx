@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
+        
       <footer className="bg-violet-200 text-white py-12 mt-96">
           <div className="container mx-auto px-6 lg:px-20">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
               <div>
+      
                 <h3 className="text-2xl font-bold mb-4">About Us</h3>
                   <p className="text-gray-600">Rent a car and smile with us. We make traveling easier, convenient, and fun. Start your adventure today!</p>
                   <div className="flex gap-4 mt-6">
