@@ -12,7 +12,10 @@ urlpatterns = [
     path("vehicles/<int:pk>", VehicleGetbyidView.as_view(), name="get-vehicle"),
     path("vehicles/<int:pk>/update", VehicleUpdateView.as_view(), name="update-vehicle"),
     path("vehicles/<int:pk>/delete", VehicleDeleteView.as_view(), name="delete-vehicle"),
-    #for search
+    #for searchgi
     path("search",SearchView.as_view(), name="search"),
+     #for Ordering Vehicle
+    path("Vehicle-orders", VehicleOrdersCreateView.as_view(), name="Vehicle-orders-create"),  
+    path("Vehicle-orders/<int:pk>", VehicleOrdersGetView.as_view(), name="Vehicle-orders-detail"),
 
 ]

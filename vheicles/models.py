@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import *
 
 # Create your models here.
 class VehicleCategory(models.Model):
@@ -21,6 +22,34 @@ class Vehicle(models.Model):
     def __str__(self):
         return self.title
 
+class VehicleOrders(models.Model):
+    VEHICLE_TYPE_CHOICES = [
+        ('bike', 'Bike'),
+        ('car', 'Car'),
+        ('scooter', 'Scooter'),
+    ]
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    phone = models.IntegerField(default=0)
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, null=True, blank=True)
+    vehicle_type = models.CharField(
+        max_length=255,
+        choices=VEHICLE_TYPE_CHOICES,
+        default='car'
+    )  
+    quantity = models.IntegerField(default=0)
+    user = models.ForeignKey(UserDetails, on_delete=models.CASCADE, null=True, blank=True)    
+    orderStatus = models.CharField(
+    max_length=255,
+    choices=[
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('completed', 'Completed'),
+    ],
+    default='Pending'
+)
 
+    created_at = models.DateTimeField(auto_now_add=True)
 
-
+    def __str__(self):
+        return self.user.username

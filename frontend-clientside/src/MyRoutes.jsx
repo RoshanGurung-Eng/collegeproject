@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Homepage from './pages/Homepage'
-import BIkeDetails from './pages/BIkeDetails'
-import Cart from './pages/Cart'
+import Signup from './pages/Authintication/Signup'
+import Bike from './pages/Bike'
 
 const MyRoutes = () => {
   return (
@@ -11,8 +11,10 @@ const MyRoutes = () => {
       <Routes>
         <Route path='' element= {<Layout/>}>
           <Route index element = {<Homepage/>}/>
-          <Route path = 'bike-details' element = {<BIkeDetails/>}/>
-          <Route path='cart' element = {<Cart/>}/>
+          <Route path='bike' element = {<Bike/>}/>
+          {/*<Route path = 'bike-details' element = {<BIkeDetails/>}/>*/}
+          <Route path='register' element = {<Signup/>}/>
+          {/*<Route path='cart' element = {<Cart/>}/>*/}
         </Route>
         
       </Routes>

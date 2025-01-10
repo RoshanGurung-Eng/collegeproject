@@ -11,5 +11,8 @@ class VehicleDetails(admin.ModelAdmin):
     search_fields = ['title', 'price']
     list_filter = ['created_at']
 
+
+
 admin.site.register(VehicleCategory, VehicleCategoryDetails)
 admin.site.register(Vehicle, VehicleDetails)
+

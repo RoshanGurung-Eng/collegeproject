@@ -20,5 +20,15 @@ class VehicleCategoryListSerialization(serializers.ModelSerializer):
     def get_vehicle(self, obj):
         vehicle = Vehicle.objects.filter(category=obj)
         return VehicleSerialization(vehicle, many=True).data
+    
+class VehicleOrdersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehicleOrders
+        fields = ['name', 'address', 'phone', 'vehicle', 'vehicle_type', 'quantity', 'user', 'order_status']
 
+    vehicle = serializers.PrimaryKeyRelatedField(queryset=Vehicle.objects.all())
+    user = serializers.PrimaryKeyRelatedField(queryset=UserDetails.objects.all())
+
+
+    
 

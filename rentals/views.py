@@ -18,23 +18,17 @@ class CustomerDestroyView(generics.DestroyAPIView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
-class CarOrdersCreateView(generics.ListCreateAPIView):
-    queryset = CarOrders.objects.all()
-    serializer_class = CarOrdersSerializer
-
-class CarOrdersGetView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CarOrders.objects.all()
-    serializer_class = CarOrdersSerializer
 
 from django.conf import settings
+
 class EsewaPaymentView(APIView):
     def post(self, request, *args, **kwargs):
         order_id = request.data.get('order_id')
         amount = request.data.get('amount')
 
         try:
-            order = CarOrders.objects.get(id=order_id)
-        except CarOrders.DoesNotExist:
+            order = VehicleOrders.objects.get(id=order_id)
+        except VehicleOrders.DoesNotExist:
             return Response({'error': 'Order not found'}, status=404)
 
         payment = esewaPayment.objects.create(

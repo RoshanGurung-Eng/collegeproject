@@ -1,29 +1,15 @@
 from rest_framework import serializers
 from .models import *
-from vheicles.models import Vehicle
+from vheicles.models import VehicleOrders
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = '__all__'
 
-class CarOrdersSerializer(serializers.ModelSerializer):
-    vehicle = serializers.PrimaryKeyRelatedField(queryset=Vehicle.objects.all(), many=True)
-    user = serializers.ReadOnlyField(source='user.id')
 
-    class Meta:
-        model = CarOrders
-        fields = ['id','name', 'address', 'phone','vehicle', 'quantity', 'user', 'orderStatus', 'created_at']
-        read_only_fields = ['orderStatus', 'created_at']
-    
-    def create (self, validated_data):
-        request = self.context.get('request')
-        validated_data['user'] = request.user
-        return super().create(validated_data)
-    
-    
 class EsewaPaymentSerializer(serializers.ModelSerializer):
-    order_id = serializers.PrimaryKeyRelatedField(queryset=CarOrders.objects.all(), many=True)
+    order_id = serializers.PrimaryKeyRelatedField(queryset=VehicleOrders.objects.all(), many=True)
     esewa_order_id = serializers.CharField(max_length=255)
     amount = serializers.IntegerField()
 

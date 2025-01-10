@@ -70,5 +70,29 @@ class SearchView(generics.ListAPIView):
             return queryset
         except Exception as e:
             return Response({"error": "No Product Found"}, status=400)
+
+class VehicleOrdersCreateView(generics.ListCreateAPIView):
+    queryset = VehicleOrders.objects.all()
+    serializer_class = VehicleOrdersSerializer
+
+class VehicleOrdersGetView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = VehicleOrders.objects.all()
+    serializer_class = VehicleOrdersSerializer
+
+class VehicleOrdersCreateView(generics.ListCreateAPIView):
+    queryset = VehicleOrders.objects.all()
+    serializer_class = VehicleOrdersSerializer
+
+    def perform_create(self, serializer):
+        # Get the vehicle by its ID (assuming it's passed in the request data)
+        vehicle_id = self.request.data.get('vehicle')  # Get the vehicle ID
+        vehicle = Vehicle.objects.get(id=vehicle_id)   # Retrieve the vehicle instance
+
+        # Ensure the user is authenticated and retrieve the user instance
+        user = self.request.user  # Get the user from the request (or handle user logic if needed)
+
+        # Pass the vehicle and user to the serializer
+        serializer.save(vehicle=vehicle, user=user)
+
        
 

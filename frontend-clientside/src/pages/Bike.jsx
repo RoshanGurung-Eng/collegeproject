@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Card from '../component/Card'
 import { ColorRing } from 'react-loader-spinner'
 import axios from 'axios'
+import Card from '../components/Card'
 
 const Bike = () => {
   const [bikes, setBikes] = useState([])
