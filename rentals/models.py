@@ -14,9 +14,6 @@ class Customer(models.Model):
     def __str__(self):
         return self.first_name and self.last_name
     
-
-
-    
 class esewaPayment(models.Model):
     esewa_order_id = models.CharField(max_length=255)
     amount = models.IntegerField(default=0)

@@ -71,28 +71,39 @@ class SearchView(generics.ListAPIView):
         except Exception as e:
             return Response({"error": "No Product Found"}, status=400)
 
-class VehicleOrdersCreateView(generics.ListCreateAPIView):
-    queryset = VehicleOrders.objects.all()
-    serializer_class = VehicleOrdersSerializer
-
 class VehicleOrdersGetView(generics.RetrieveUpdateDestroyAPIView):
     queryset = VehicleOrders.objects.all()
     serializer_class = VehicleOrdersSerializer
+
+from users.utils import create_user
+from rest_framework.exceptions import ValidationError
+
 
 class VehicleOrdersCreateView(generics.ListCreateAPIView):
     queryset = VehicleOrders.objects.all()
     serializer_class = VehicleOrdersSerializer
 
     def perform_create(self, serializer):
-        # Get the vehicle by its ID (assuming it's passed in the request data)
-        vehicle_id = self.request.data.get('vehicle')  # Get the vehicle ID
-        vehicle = Vehicle.objects.get(id=vehicle_id)   # Retrieve the vehicle instance
+        # Get the data from the request
+        username = self.request.data.get('username')
+        email = self.request.data.get('email')
+        password = self.request.data.get('password', 'default_password')  # Default password if none provided
 
-        # Ensure the user is authenticated and retrieve the user instance
-        user = self.request.user  # Get the user from the request (or handle user logic if needed)
+        # Ensure that username and email are present in the request
+        if not username:
+            raise ValidationError("Username is required.")
+        if not email:
+            raise ValidationError("Email is required.")
+        
+        # Create the user with the given username, email, and password
+        user = create_user(username=username, email=email, password=password)
 
-        # Pass the vehicle and user to the serializer
+        # Get the vehicle ID and ensure the vehicle exists
+        vehicle_id = self.request.data.get('vehicle')
+        try:
+            vehicle = Vehicle.objects.get(id=vehicle_id)
+        except Vehicle.DoesNotExist:
+            raise ValidationError("Vehicle not found.")
+
+        # Save the order with the associated user and vehicle
         serializer.save(vehicle=vehicle, user=user)
-
-       
-

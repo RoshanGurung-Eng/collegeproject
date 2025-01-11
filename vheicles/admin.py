@@ -11,8 +11,11 @@ class VehicleDetails(admin.ModelAdmin):
     search_fields = ['title', 'price']
     list_filter = ['created_at']
 
-
+class VehicleOrdersAdmin(admin.ModelAdmin):
+    list_display =  ['vehicle', 'vehicle_type', 'quantity', 'user']
+    search_fields = ['id','vehicle_type','vehicle']
 
 admin.site.register(VehicleCategory, VehicleCategoryDetails)
 admin.site.register(Vehicle, VehicleDetails)
+admin.site.register(VehicleOrders,VehicleOrdersAdmin )
 

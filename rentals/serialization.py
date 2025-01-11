@@ -7,7 +7,6 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = '__all__'
 
-
 class EsewaPaymentSerializer(serializers.ModelSerializer):
     order_id = serializers.PrimaryKeyRelatedField(queryset=VehicleOrders.objects.all(), many=True)
     esewa_order_id = serializers.CharField(max_length=255)

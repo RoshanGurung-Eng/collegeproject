@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import *
+from users.models import UserDetails
 
 # Create your models here.
 class VehicleCategory(models.Model):
@@ -28,9 +28,7 @@ class VehicleOrders(models.Model):
         ('car', 'Car'),
         ('scooter', 'Scooter'),
     ]
-    name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
-    phone = models.IntegerField(default=0)
+    
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, null=True, blank=True)
     vehicle_type = models.CharField(
         max_length=255,
@@ -52,4 +50,4 @@ class VehicleOrders(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.username
+        return f"{self.user.username if self.user else 'No User'} - {self.vehicle.title if self.vehicle else 'No Vehicle'}"

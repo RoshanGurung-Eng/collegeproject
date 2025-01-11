@@ -34,6 +34,7 @@ class LoginView(APIView):
             )
         else:
             return Response({"error": "Wrong credentials"}, status=HTTP_401_UNAUTHORIZED)
+        
 class ChangePassword(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordSerializer
@@ -48,12 +49,4 @@ class LogoutView(APIView):
         
         except Exception as e:
             return Response({"error": str(e)})
-
-class LogoutView(APIView):
-    def post(self, request):
-        serializers = LogoutSerializer(data=request.data)
-        serializers.is_valid(raise_exception=True)
-        serializers.save()
-
-        return Response({"success": "Successfully logged out"}, status=200)
 
