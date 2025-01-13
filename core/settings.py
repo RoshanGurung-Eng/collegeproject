@@ -162,10 +162,10 @@ JAZZMIN_SETTINGS = {
     "site_title": "Vehice Rental System",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "SahYaatri",
+    "site_header": "SaahYaatri",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "SahYaatri",
+    "site_brand": "SaahYaatri",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": None,

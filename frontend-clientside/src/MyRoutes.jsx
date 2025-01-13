@@ -4,6 +4,7 @@ import Layout from './components/Layout'
 import Homepage from './pages/Homepage'
 import Signup from './pages/Authintication/Signup'
 import Bike from './pages/Bike'
+import ContactUs from './pages/ContactUs'
 
 const MyRoutes = () => {
   return (
@@ -15,6 +16,8 @@ const MyRoutes = () => {
           {/*<Route path = 'bike-details' element = {<BIkeDetails/>}/>*/}
           <Route path='register' element = {<Signup/>}/>
           {/*<Route path='cart' element = {<Cart/>}/>*/}
+          <Route path='Contact-us' element = {<ContactUs/>}/>
+
         </Route>
         
       </Routes>

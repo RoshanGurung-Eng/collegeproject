@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from rest_framework.status import HTTP_401_UNAUTHORIZED
+from rest_framework.generics import CreateAPIView
 # Create your views here.
 User = get_user_model()
 
@@ -50,3 +51,6 @@ class LogoutView(APIView):
         except Exception as e:
             return Response({"error": str(e)})
 
+class ContactMessageCreateView(CreateAPIView):
+    queryset = ContactMessage.objects.all()
+    serializer_class = ContactMessageSerializer

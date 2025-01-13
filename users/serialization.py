@@ -52,3 +52,12 @@ class LogoutSerializer(serializers.Serializer):
 
         except Exception as e:
             self.fail('invalid_token')
+
+class ContactMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactMessage
+        fields = ['name','email', 'subject','message']
+    def validate_email(self, value):
+        if not value.endswith("@example.com"):  # Example custom validation
+            raise serializers.ValidationError("Email must be from example.com")
+        return value
